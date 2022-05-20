@@ -12,7 +12,9 @@
 	<title>Enfermera</title>
 </h:head>
 <body>
-
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
 	<h:form>
 		<p:menubar>
 			<p:menuitem value="Regresar" icon="pi pi-home" action="/menu" />
@@ -32,8 +34,21 @@
 	</h:form>
 	<div>
 
-		<h:form>
-			<p:dataTable value="#{beanSalEnfermera.listaCarnet}" var="c" emptyMessage="Aun no hay carnets requistrados"> 
+		<h:form >
+			<h:outputText value="Ingrese el codigo del carnet" />
+			<p:inputText value="#{beanSalEnfermera.idSalCarnet}"></p:inputText>
+			<p:commandButton value="Validar"
+				actionListener="#{beanSalEnfermera.actionListenerValidar()}"
+				update="@form,:tabla"></p:commandButton>
+		</h:form>
+
+		<h:form id="tabla">
+			<p:dataTable value="#{beanSalEnfermera.listaCarnet}" var="c"
+				emptyMessage="Aun no hay carnets requistrados">
+				<p:column>
+					<h:outputText value="#{c.idSalCarnet}" />
+				</p:column>
+
 				<p:column headerText="CEDULA">
 					<h:outputText value="#{c.cedulaEstudiante}" />
 				</p:column>
@@ -46,9 +61,7 @@
 				<p:column headerText="ESTADO">
 					<h:outputText value="#{c.verificado}" />
 				</p:column>
-				<p:column headerText="OPCIONES">
-					<p:commandButton value="Validar"></p:commandButton>
-				</p:column>
+
 			</p:dataTable>
 		</h:form>
 	</div>

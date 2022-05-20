@@ -37,9 +37,10 @@ public class ManagerSalud {
 	}
 
 //    metodos para enfermera
-	public void validadCarnet(SalCarnet carnet) {
+	public void validadCarnet(int idSalCarnet) {
+		SalCarnet carnet = eManager.find(SalCarnet.class, idSalCarnet);
 		carnet.setVerificado(true);
-		eManager.merge(carnet); 
+		eManager.merge(carnet);
 	}
 
 }
